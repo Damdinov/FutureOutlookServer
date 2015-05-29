@@ -11,6 +11,7 @@ public class ModelDaoImpl implements ModelDao{
     public void addModel(ModelsEntity model) throws SQLException {
         Session session = null;
 
+        //TODO: try with resources everywhere where try
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
@@ -45,7 +46,6 @@ public class ModelDaoImpl implements ModelDao{
 
     @Override
     public List getModel(double latitude, double longitude) throws SQLException {
-        ModelsEntity model = null;
         Session session = null;
         List list = null;
 
@@ -73,10 +73,6 @@ public class ModelDaoImpl implements ModelDao{
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             list = session.createCriteria(ModelsEntity.class).list();
-
-            for (Object element : list) {
-                System.out.println("Suka " + element);
-            }
         } finally {
             if (session != null){
                 session.close();

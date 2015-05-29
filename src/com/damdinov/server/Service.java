@@ -11,18 +11,9 @@ public class Service {
     private static final String DIR_PATH = "C:\\test\\";
 
     @GET
-    @Path("/hw/")
-    @Produces("text/plain")
-    public String getClichedMessage() {
-        return "Hello World";
-    }
-
-
-    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/models/")
     public Response getModel(@QueryParam("latitude") double latitude, @QueryParam("longitude") double longitude){
-        System.out.println("da suka blya =" + latitude + " " + longitude);
         Factory factory = Factory.getInstance();
         ModelDaoImpl modelDao = factory.getModelDao();
         ModelsEntity modelEntity = null;
@@ -39,7 +30,7 @@ public class Service {
             e.printStackTrace();
         }
 
-        return Response.ok(modelEntity).build();//modelEntity;
+        return Response.ok(modelEntity).build();
     }
 
     @GET
@@ -48,7 +39,7 @@ public class Service {
     public Response getObjFile(@PathParam("filename") String filename) {
         //TODO check
         File file = new File(DIR_PATH + filename + ".obj");
-        Response.ResponseBuilder response = Response.ok((Object) file);
+        Response.ResponseBuilder response = Response.ok(file);
         //response.header("Content-Disposition","attachment; filename=\"file_from_server.obj\"");
         return response.build();
     }
@@ -60,6 +51,7 @@ public class Service {
         //TODO check
 
         File file = new File(DIR_PATH + filename + ".mtl");
+
         Response.ResponseBuilder response = Response.ok(file);
         //response.header("Content-Disposition","attachment; filename=newfile.mlt");
         return response.build();

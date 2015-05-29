@@ -1,7 +1,6 @@
 package com.damdinov.server;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
